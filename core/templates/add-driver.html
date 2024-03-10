@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tezkor Hiring</title>
+    <link rel="icon" href="{% static 'images/logo.jpg' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <!-- header start -->
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'home' %}">Tezkor Hiring</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-link " aria-current="page" href="{% url 'companies' %}">Companies</a>
+                    <a class="nav-link " aria-current="page" href="{% url 'add_company' %}">Add Company</a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'add_driver' %}">Add Driver</a>
+                </div>
+                </div>
+            </div>
+        </nav>
+    <!-- header end -->
+     <!-- form start -->
+    <div class="container p-5">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="post" action="{% url 'add_driver' %}" onsubmit="return validateForm()">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Phone number</label>
+                        <input type="text" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" name="phone_number">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleDataList" class="form-label">State</label>
+                        <input class="form-control" list="datalistOptions" id="exampleDataList" placeholder="Type to search..." name="state">
+                        <datalist id="datalistOptions">
+                            {% for state in states %}
+                            <option value="{{ state }}">{{ state }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Rate</label>
+                        <select class="form-select" aria-label="Default select example" name="rate">
+                            <option selected>Open this select menu</option>
+                            {% for rate in rates %}
+                            <option>{{rate}}</option>
+                            {% endfor %}
+                          </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Age</label>
+                        <select class="form-select" aria-label="Default select example" name="age">
+                            <option selected>Open this select menu</option>
+                            {% for age in ages %}
+                            <option>{{age}}</option>
+                            {% endfor %}
+                          </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Nationality</label>
+                        <select class="form-select" id="exampleInputPassword1" aria-label="Size 3 select example" name="nationality">
+                            <option selected>Open this select menu</option>
+                            {% for nation in nations %}
+                            <option>{{nation}}</option>
+                            {% endfor %}
+                          </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Experience</label>
+                        <select class="form-select" aria-label="Default select example" name="experience">
+                            <option selected>Open this select menu</option>
+                            {% for exp in exps %}
+                            <option>{{ exp }}</option>
+                            {% endfor %}
+                          </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- form end -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="{% static 'js/validation.js' %}"></script>
+</body>
+</html>
